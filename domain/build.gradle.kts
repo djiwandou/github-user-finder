@@ -39,16 +39,10 @@ dependencies {
             version = org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION
         )
     )
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("com.android.support.constraint:constraint-layout:2.0.4")
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.0")
 
-    // dependency injection
-    val koinVersion = "2.0.1"
-    implementation("org.koin:koin-android:$koinVersion")
-    implementation("org.koin:koin-android-scope:$koinVersion")
-    implementation("org.koin:koin-androidx-viewmodel:$koinVersion")
-
+    implementation("com.alibaba:fastjson:1.2.75")
 
     // testing
     testImplementation("junit:junit:4.13.2")
@@ -60,4 +54,6 @@ dependencies {
 
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
+
+
 }
