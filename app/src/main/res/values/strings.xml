@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GithubUser</string>
+    <string name="find_github_user">Find Github User</string>
 </resources>
