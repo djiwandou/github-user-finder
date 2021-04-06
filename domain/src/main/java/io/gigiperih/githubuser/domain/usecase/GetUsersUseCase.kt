@@ -7,5 +7,5 @@ import io.gigiperih.githubuser.domain.repository.UsersRepository
 class GetUsersUseCase constructor(private val repository: UsersRepository) :
     SingleUseCase<List<User>>() {
 
-    override fun buildUseCaseSingle() = repository.getUsers(param = "gigi")
+    override fun buildSingleUseCase() = repository.getUsers(param = "gigi")
 }

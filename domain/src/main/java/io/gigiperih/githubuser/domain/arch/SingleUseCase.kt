@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 abstract class SingleUseCase<T> : BaseUseCase() {
-    internal abstract fun buildUseCaseSingle(): Single<T>
+    internal abstract fun buildSingleUseCase(): Single<T>
 
     fun execute(
         onSuccess: ((t: T) -> Unit),
@@ -13,7 +13,7 @@ abstract class SingleUseCase<T> : BaseUseCase() {
         onFinished: () -> Unit = {}
     ) {
         disposeLast()
-        lastDisposable = buildUseCaseSingle()
+        lastDisposable = buildSingleUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate(onFinished)
