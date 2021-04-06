@@ -1,9 +1,9 @@
 package io.gigiperih.githubuser.domain.entity
 
-import com.alibaba.fastjson.annotation.JSONField
+import com.google.gson.annotations.SerializedName
 
 data class User(
-    @JSONField(name = "login") val userName: String,
-    @JSONField(name = "avatar_url") val avatar: String,
-    @JSONField(name = "html_url") val url: String
+    @SerializedName("login") val userName: String,
+    @SerializedName("avatar_url") val avatar: String,
+    @SerializedName("html_url") val url: String
 )
