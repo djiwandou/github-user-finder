@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("kapt")
 }
@@ -25,7 +26,10 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -40,10 +44,10 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(
-            kotlin(
-                    module = "stdlib-jdk7",
-                    version = org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION
-            )
+        kotlin(
+            module = "stdlib-jdk7",
+            version = org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION
+        )
     )
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("com.google.android.material:material:1.3.0")
@@ -55,12 +59,10 @@ dependencies {
     implementation("org.koin:koin-android-scope:$koinVersion")
     implementation("org.koin:koin-androidx-viewmodel:$koinVersion")
 
-    // parser
-    implementation("com.alibaba:fastjson:1.2.75")
-
     // retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // okhttp
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
@@ -73,6 +75,12 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:$glideVersion")
     kapt("com.github.bumptech.glide:compiler:$glideVersion")
 
+    implementation("com.google.dagger:hilt-android:2.31-alpha")
+    kapt("com.google.dagger:hilt-android-compiler:2.31-alpha")
+
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    kapt("androidx.hilt:hilt-compiler:1.0.0-beta01")
+
     // testing
     testImplementation("junit:junit:4.13.2")
     testImplementation("android.arch.core:core-testing:1.1.1")
@@ -83,4 +91,7 @@ dependencies {
 
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
+
+    implementation(project(":domain"))
+    implementation(project(":data"))
 }
