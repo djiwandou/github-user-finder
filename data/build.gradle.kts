@@ -67,6 +67,4 @@ dependencies {
     testImplementation("androidx.test.ext:truth:1.3.0")
     testImplementation("org.mockito:mockito-core:3.1.0")
 
-    androidTestImplementation("com.android.support.test:runner:1.0.2")
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
 }
