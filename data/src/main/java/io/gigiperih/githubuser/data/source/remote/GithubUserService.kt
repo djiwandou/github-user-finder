@@ -5,6 +5,6 @@ import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 
 interface GithubUserService {
-    @GET("users")
+    @GET("users?q=gigi")
     fun getUsers(): Single<List<User>>
 }

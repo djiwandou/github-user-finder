@@ -63,9 +63,12 @@ dependencies {
     implementation("org.koin:koin-android-scope:$koinVersion")
     implementation("org.koin:koin-androidx-viewmodel:$koinVersion")
 
+    // utils
+    implementation("androidx.fragment:fragment-ktx:1.3.2")
+
     // retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // okhttp
@@ -79,9 +82,9 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:$glideVersion")
     kapt("com.github.bumptech.glide:compiler:$glideVersion")
 
+    // DI
     implementation("com.google.dagger:hilt-android:2.31-alpha")
     kapt("com.google.dagger:hilt-android-compiler:2.31-alpha")
-
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     kapt("androidx.hilt:hilt-compiler:1.0.0-beta01")
 

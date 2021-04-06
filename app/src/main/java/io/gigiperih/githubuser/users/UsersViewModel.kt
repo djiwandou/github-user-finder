@@ -9,17 +9,14 @@ import javax.inject.Inject
 @HiltViewModel
 class UsersViewModel @Inject constructor(private val getUsersUseCase: GetUsersUseCase) :
     ViewModel() {
-    init {
-        load()
-    }
 
-    private fun load() {
+    fun load() { Timber.d("grigi > load")
         getUsersUseCase.execute(
             onSuccess = {
-                Timber.d("data > ${it.map { it }}")
+                Timber.d("grigi > ${it.map { it }}")
             },
             onError = {
-                Timber.d("error")
+                Timber.d("grigi")
             },
         )
     }
