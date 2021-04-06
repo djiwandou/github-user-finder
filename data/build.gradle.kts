@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -39,17 +40,21 @@ dependencies {
             version = org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION
         )
     )
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("com.android.support.constraint:constraint-layout:2.0.4")
 
-    // dependency injection
-    val koinVersion = "2.0.1"
-    implementation("org.koin:koin-android:$koinVersion")
-    implementation("org.koin:koin-android-scope:$koinVersion")
-    implementation("org.koin:koin-androidx-viewmodel:$koinVersion")
+    implementation(project(":domain"))
 
-    
+    implementation("com.google.dagger:hilt-android:2.28-alpha")
+    kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
+
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.0")
+    // retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+
+    // okhttp
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
     // testing
     testImplementation("junit:junit:4.13.2")
     testImplementation("android.arch.core:core-testing:1.1.1")
