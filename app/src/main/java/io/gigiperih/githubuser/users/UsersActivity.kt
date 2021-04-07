@@ -31,6 +31,7 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Timber.d("kememdiknas > $it")
+                viewModel.findUsers(it)
             }, {
                 it.printStackTrace()
             })
@@ -38,7 +39,6 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
 
 
         viewModel.users.observe(this, { users ->
-            Timber.d("lnx $users")
             with(dataBinding) {
                 val usersAdapter = UsersAdapter(users.items)
                 usersAdapter.notifyDataSetChanged()

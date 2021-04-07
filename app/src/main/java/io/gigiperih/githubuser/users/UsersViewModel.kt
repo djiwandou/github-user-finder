@@ -14,14 +14,17 @@ class UsersViewModel @Inject constructor(private val searchUsersUseCase: SearchU
 
     val users: MutableLiveData<ResponseUser> = MutableLiveData()
 
-    fun load() {
-        searchUsersUseCase.execute(
-            onSuccess = {
-                users.postValue(it)
-            },
-            onError = {
-                Timber.d("grigi ${it.printStackTrace()}")
-            },
-        )
+    fun findUsers(query: String) {
+        searchUsersUseCase.apply {
+            this.query = query
+            execute(
+                onSuccess = {
+                    users.postValue(it)
+                },
+                onError = {
+                    Timber.d("grigi ${it.printStackTrace()}")
+                },
+            )
+        }
     }
 }
