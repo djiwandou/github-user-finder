@@ -18,11 +18,15 @@ class UsersViewModel @Inject constructor(private val searchUsersUseCase: SearchU
         searchUsersUseCase.apply {
             this.query = query
             execute(
+                onStart = {
+                    Timber.d("grigi > starting")
+                },
                 onSuccess = {
+                    Timber.d("grigi > success")
                     users.postValue(it)
                 },
                 onError = {
-                    Timber.d("grigi ${it.printStackTrace()}")
+                    Timber.d("grigi > error: ${it.printStackTrace()}")
                 },
             )
         }

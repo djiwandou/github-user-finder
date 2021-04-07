@@ -58,6 +58,9 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                     )
                     adapter = usersAdapter
                 }
+
+                textResult.text =
+                    "Found ${users.totalCount} data; keywords \"${textInputSearch.text.toString()}\"."
             }
         })
     }
