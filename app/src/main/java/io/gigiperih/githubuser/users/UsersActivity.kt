@@ -11,6 +11,7 @@ import io.gigiperih.githubuser.R
 import io.gigiperih.githubuser.arch.BaseActivity
 import io.gigiperih.githubuser.databinding.ActivityUsersBinding
 import io.gigiperih.githubuser.uitls.RxSearchObservable
+import io.gigiperih.githubuser.uitls.ext.hideSoftKeyboard
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
@@ -36,7 +37,11 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                 it.printStackTrace()
             })
 
-
+        dataBinding.recyclerViewUser.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })
 
         viewModel.users.observe(this, { users ->
             with(dataBinding) {
@@ -59,6 +64,7 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                     adapter = usersAdapter
                 }
 
+                hideSoftKeyboard()
                 textResult.text =
                     "Found ${users.totalCount} data; keywords \"${textInputSearch.text.toString()}\"."
             }
