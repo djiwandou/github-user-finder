@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:textColor="@color/black_90"
             android:fontFamily="@font/lato_bold"
             android:text="Gilang"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"

@@ -2,6 +2,7 @@ package io.gigiperih.githubuser.users
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +32,7 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                             RecyclerView.VERTICAL,
                             false
                         )
+                    addItemDecoration(DividerItemDecoration(this@UsersActivity, RecyclerView.VERTICAL))
                     adapter = usersAdapter
                 }
             }
