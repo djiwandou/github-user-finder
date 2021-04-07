@@ -63,6 +63,9 @@ dependencies {
     implementation("org.koin:koin-android-scope:$koinVersion")
     implementation("org.koin:koin-androidx-viewmodel:$koinVersion")
 
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.0")
+
     // utils
     implementation("androidx.fragment:fragment-ktx:1.3.2")
 
