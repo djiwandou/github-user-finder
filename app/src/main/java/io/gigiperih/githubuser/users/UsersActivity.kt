@@ -60,8 +60,11 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                 }
 
                 hideSoftKeyboard()
-                textResult.text =
-                    "Found ${users.totalCount} data; keywords \"${textInputSearch.text.toString()}\"."
+                textResult.text = getString(
+                    R.string.result_search,
+                    users.totalCount,
+                    textInputSearch.text.toString()
+                )
             }
         })
 
