@@ -77,6 +77,9 @@ dependencies {
     // okhttp
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
+    // lottie
+    implementation("com.airbnb.android:lottie:3.5.0")
+
     // logging
     implementation("com.jakewharton.timber:timber:4.7.1")
 

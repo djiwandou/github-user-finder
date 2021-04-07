@@ -13,6 +13,7 @@ class UsersViewModel @Inject constructor(private val searchUsersUseCase: SearchU
     ViewModel() {
 
     val users: MutableLiveData<ResponseUser> = MutableLiveData()
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     fun findUsers(query: String) {
         searchUsersUseCase.apply {
@@ -20,10 +21,12 @@ class UsersViewModel @Inject constructor(private val searchUsersUseCase: SearchU
             execute(
                 onStart = {
                     Timber.d("grigi > starting")
+                    isLoading.postValue(true)
                 },
                 onSuccess = {
                     Timber.d("grigi > success")
                     users.postValue(it)
+                    isLoading.postValue(false)
                 },
                 onError = {
                     Timber.d("grigi > error: ${it.printStackTrace()}")

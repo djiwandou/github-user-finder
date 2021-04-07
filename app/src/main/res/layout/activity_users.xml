@@ -78,5 +78,15 @@
             tools:itemCount="4"
             tools:listitem="@layout/row_user" />
 
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_animation"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:visibility="gone"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/search_anim" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -11,10 +11,11 @@ import io.gigiperih.githubuser.R
 import io.gigiperih.githubuser.arch.BaseActivity
 import io.gigiperih.githubuser.databinding.ActivityUsersBinding
 import io.gigiperih.githubuser.uitls.RxSearchObservable
+import io.gigiperih.githubuser.uitls.ext.gone
 import io.gigiperih.githubuser.uitls.ext.hideSoftKeyboard
+import io.gigiperih.githubuser.uitls.ext.visible
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
@@ -31,17 +32,11 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Timber.d("kememdiknas > $it")
-                viewModel.findUsers(it)
+                if (it.isNotEmpty()) viewModel.findUsers(it)
             }, {
                 it.printStackTrace()
             })
 
-        dataBinding.recyclerViewUser.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-        })
 
         viewModel.users.observe(this, { users ->
             with(dataBinding) {
@@ -68,6 +63,19 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                 textResult.text =
                     "Found ${users.totalCount} data; keywords \"${textInputSearch.text.toString()}\"."
             }
+        })
+
+        viewModel.isLoading.observe(this, { isLoading ->
+            with(dataBinding) {
+                if (isLoading) {
+                    recyclerViewUser.gone()
+                    loadingAnimation.visible()
+                } else {
+                    recyclerViewUser.visible()
+                    loadingAnimation.gone()
+                }
+            }
+
         })
     }
 }
