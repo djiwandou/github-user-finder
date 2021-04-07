@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -39,16 +41,16 @@ dependencies {
             version = org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION
         )
     )
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("com.android.support.constraint:constraint-layout:2.0.4")
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.0")
 
-    // dependency injection
-    val koinVersion = "2.0.1"
-    implementation("org.koin:koin-android:$koinVersion")
-    implementation("org.koin:koin-android-scope:$koinVersion")
-    implementation("org.koin:koin-androidx-viewmodel:$koinVersion")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    implementation("com.google.dagger:hilt-android:2.31-alpha")
+    kapt("com.google.dagger:hilt-android-compiler:2.31-alpha")
+
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    kapt("androidx.hilt:hilt-compiler:1.0.0-beta01")
 
     // testing
     testImplementation("junit:junit:4.13.2")
@@ -57,7 +59,4 @@ dependencies {
     testImplementation("androidx.test.ext:junit:1.1.2")
     testImplementation("androidx.test.ext:truth:1.3.0")
     testImplementation("org.mockito:mockito-core:3.1.0")
-
-    androidTestImplementation("com.android.support.test:runner:1.0.2")
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
 }
