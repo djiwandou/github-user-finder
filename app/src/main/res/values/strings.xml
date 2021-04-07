@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GithubUser</string>
     <string name="find_github_user">Find Github User</string>
+    <string name="result_search">Found %1$d data; keywords: \"%2$s\".</string>
 </resources>
