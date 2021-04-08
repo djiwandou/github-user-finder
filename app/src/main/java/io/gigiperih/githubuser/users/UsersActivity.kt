@@ -35,20 +35,12 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
         observe(viewModel.usersState, ::bindState)
 
         ViewCompat.setNestedScrollingEnabled(dataBinding.recyclerViewUser, true)
+        setupPagingObserver()
+        setupSearchObserver()
+        setupRecyclerView()
+    }
 
-        RxSearchObservable.fromView(dataBinding.textInputSearch)
-            .debounce(300, TimeUnit.MILLISECONDS)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                if (it.isNotEmpty()) {
-                    usersAdapter.reset()
-                    viewModel.findUsers(it, startingPage)
-                }
-            }, {
-                it.printStackTrace()
-            })
-
+    private fun setupPagingObserver() {
         RxPagingObservable.fromView(dataBinding.recyclerViewUser)
             .debounce(300, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
@@ -62,6 +54,25 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                 it.printStackTrace()
             })
 
+    }
+
+    private fun setupSearchObserver() {
+        RxSearchObservable.fromView(dataBinding.textInputSearch)
+            .debounce(300, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                if (it.isNotEmpty()) {
+                    usersAdapter.reset()
+                    viewModel.findUsers(it, startingPage)
+                }
+            }, {
+                it.printStackTrace()
+            })
+
+    }
+
+    private fun setupRecyclerView() {
         with(dataBinding) {
             recyclerViewUser.apply {
                 layoutManager =
@@ -79,7 +90,6 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                 adapter = usersAdapter
             }
         }
-
 
     }
 
@@ -116,7 +126,7 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
             is UsersState.OnCompletelyLoaded -> {
                 Snackbar.make(
                     dataBinding.root,
-                    "All pages are already displayed.. ",
+                    getString(R.string.all_pages_are_displayed),
                     Snackbar.LENGTH_LONG
                 ).show()
             }
