@@ -5,5 +5,5 @@ sealed class UsersState<out T> {
     class OnLoadMore<out T> : UsersState<T>()
     data class OnSuccess<out T>(val data: T?) : UsersState<T>()
     class OnCompletelyLoaded<out T> : UsersState<T>()
-    class OnError<out T>(private val message: String?) : UsersState<T>()
+    class OnError<out T>(val message: String?) : UsersState<T>()
 }

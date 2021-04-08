@@ -6,6 +6,7 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import io.gigiperih.githubuser.R
 import io.gigiperih.githubuser.arch.BaseActivity
@@ -91,7 +92,7 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                 }
             }
             is UsersState.OnLoadMore -> {
-
+                // TODO: add loading item view type in recyclerView
             }
             is UsersState.OnSuccess -> {
                 val users = state.data
@@ -113,12 +114,18 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
 
             }
             is UsersState.OnCompletelyLoaded -> {
-
+                Snackbar.make(
+                    dataBinding.root,
+                    "All pages are already displayed.. ",
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
             is UsersState.OnError -> {
+                val error = state.message
                 with(dataBinding) {
                     recyclerViewUser.gone()
                     loadingAnimation.visible()
+                    textResult.text = error
                 }
             }
         }

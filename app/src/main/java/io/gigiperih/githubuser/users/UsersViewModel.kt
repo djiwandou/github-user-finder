@@ -32,7 +32,7 @@ class UsersViewModel @Inject constructor(private val searchUsersUseCase: SearchU
                             usersState.postValue(UsersState.OnCompletelyLoaded())
                         } else {
                             usersState.postValue(
-                                UsersState.OnError("Unable to find what you're looking for..")
+                                UsersState.OnError("Found nuffin, try another keywords :)")
                             )
                         }
                     }
