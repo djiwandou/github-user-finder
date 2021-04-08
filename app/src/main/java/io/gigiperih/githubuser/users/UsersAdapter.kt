@@ -6,14 +6,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.gigiperih.githubuser.databinding.RowUserBinding
 import io.gigiperih.githubuser.domain.entity.User
+import io.gigiperih.githubuser.domain.usecase.SearchUsersUseCase
 
 class UsersAdapter :
     RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
     private val items = mutableListOf<User>()
-    
+
     fun addItems(list: List<User>) {
         items.addAll(list)
-        notifyItemRangeInserted(items.size - 1, 10)
+        notifyItemRangeInserted(items.size - 1, SearchUsersUseCase.PER_PAGE)
+    }
+
+    fun reset() {
+        items.clear()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

@@ -10,8 +10,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.gigiperih.githubuser.R
 import io.gigiperih.githubuser.arch.BaseActivity
 import io.gigiperih.githubuser.databinding.ActivityUsersBinding
+import io.gigiperih.githubuser.domain.entity.ResponseUser
 import io.gigiperih.githubuser.uitls.RxPagingObservable
 import io.gigiperih.githubuser.uitls.RxSearchObservable
+import io.gigiperih.githubuser.uitls.ext.gone
+import io.gigiperih.githubuser.uitls.ext.observe
+import io.gigiperih.githubuser.uitls.ext.visible
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -21,10 +25,14 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
     private val viewModel: UsersViewModel by viewModels()
     private val usersAdapter = UsersAdapter()
 
-    private var page = 2
+    private val startingPage = 1
+    private var currentPage = 2
+
     override fun layoutRes() = R.layout.activity_users
 
     override fun initView(savedInstanceState: Bundle?) {
+        observe(viewModel.usersState, ::bindState)
+
         ViewCompat.setNestedScrollingEnabled(dataBinding.recyclerViewUser, true)
 
         RxSearchObservable.fromView(dataBinding.textInputSearch)
@@ -32,7 +40,10 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                if (it.isNotEmpty()) viewModel.findUsers(it, 1)
+                if (it.isNotEmpty()) {
+                    usersAdapter.reset()
+                    viewModel.findUsers(it, startingPage)
+                }
             }, {
                 it.printStackTrace()
             })
@@ -42,7 +53,10 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                if (it) viewModel.findUsers(dataBinding.textInputSearch.text.toString(), page++)
+                if (it) viewModel.findUsers(
+                    dataBinding.textInputSearch.text.toString(),
+                    currentPage++
+                )
             }, {
                 it.printStackTrace()
             })
@@ -65,29 +79,49 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
             }
         }
 
-        viewModel.users.observe(this, { users ->
-            usersAdapter.addItems(users.items)
 
-            with(dataBinding) {
-                textResult.text = getString(
-                    R.string.result_search,
-                    users.totalCount,
-                    textInputSearch.text.toString()
-                )
-            }
-        })
-
-        viewModel.isLoading.observe(this, { isLoading ->
-//            with(dataBinding) {
-//                if (isLoading) {
-//                    recyclerViewUser.gone()
-//                    loadingAnimation.visible()
-//                } else {
-//                    recyclerViewUser.visible()
-//                    loadingAnimation.gone()
-//                }
-//            }
-
-        })
     }
+
+    private fun bindState(state: UsersState<ResponseUser>) {
+        when (state) {
+            is UsersState.OnInitialLoading -> {
+                with(dataBinding) {
+                    recyclerViewUser.gone()
+                    loadingAnimation.visible()
+                }
+            }
+            is UsersState.OnLoadMore -> {
+
+            }
+            is UsersState.OnSuccess -> {
+                val users = state.data
+                users?.let { response ->
+                    usersAdapter.addItems(response.items)
+
+                    with(dataBinding) {
+                        recyclerViewUser.visible()
+                        loadingAnimation.gone()
+
+
+                        textResult.text = getString(
+                            R.string.result_search,
+                            response.totalCount,
+                            textInputSearch.text.toString()
+                        )
+                    }
+                }
+
+            }
+            is UsersState.OnCompletelyLoaded -> {
+
+            }
+            is UsersState.OnError -> {
+                with(dataBinding) {
+                    recyclerViewUser.gone()
+                    loadingAnimation.visible()
+                }
+            }
+        }
+    }
+
 }
