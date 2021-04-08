@@ -20,14 +20,14 @@ class UsersRepositoryImplTest {
     private val objectUnderTest = UsersRepositoryImpl(FakeGithubUserService())
 
     @Test
-    fun `verify object under test is not null`() {
+    fun `verify UsersRepositoryImpl is not null`() {
         Truth.assertThat(objectUnderTest).apply {
             isNotNull()
         }
     }
 
     @Test
-    fun `verify object under test returns valid response`() {
+    fun `verify UsersRepositoryImpl returns valid response`() {
         val data = objectUnderTest.getUsers("param", 1, 2)
 
         Truth.assertThat(data.blockingGet()).apply {
@@ -37,7 +37,7 @@ class UsersRepositoryImplTest {
     }
 
     @Test
-    fun `verify object under test returns valid items`() {
+    fun `verify UsersRepositoryImpl returns valid items`() {
         val data = objectUnderTest.getUsers("param", 1, 2)
         val itemCount = data.blockingGet().totalCount
 
