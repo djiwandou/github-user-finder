@@ -9,6 +9,6 @@ fun Activity.hideSoftKeyboard() {
         this,
         InputMethodManager::class.java
     )
-    imm?.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+    imm?.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
 
 }

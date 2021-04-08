@@ -6,10 +6,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.gigiperih.githubuser.databinding.RowUserBinding
 import io.gigiperih.githubuser.domain.entity.User
-import timber.log.Timber
+import io.gigiperih.githubuser.domain.usecase.SearchUsersUseCase
 
-class UsersAdapter(private val users: List<User>) :
+class UsersAdapter :
     RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+    private val items = mutableListOf<User>()
+
+    fun addItems(list: List<User>) {
+        items.addAll(list)
+        notifyItemRangeInserted(items.size - 1, SearchUsersUseCase.PER_PAGE)
+    }
+
+    fun reset() {
+        items.clear()
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -17,10 +28,10 @@ class UsersAdapter(private val users: List<User>) :
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bindUser(users[position])
+        holder.bindUser(items[position])
     }
 
-    override fun getItemCount() = users.size
+    override fun getItemCount() = items.size
 
     inner class UserViewHolder(
         var binding: RowUserBinding

@@ -9,6 +9,7 @@ data class ResponseUser(
 )
 
 data class User(
+    @SerializedName("id") val id: Long,
     @SerializedName("login") val userName: String,
     @SerializedName("avatar_url") val avatar: String,
     @SerializedName("html_url") val url: String

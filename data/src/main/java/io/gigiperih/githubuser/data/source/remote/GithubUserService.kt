@@ -7,5 +7,9 @@ import retrofit2.http.Query
 
 interface GithubUserService {
     @GET("search/users")
-    fun getUsers(@Query("q") query: String): Single<ResponseUser>
+    fun getUsers(
+        @Query("q") query: String,
+        @Query("page") since: Int,
+        @Query("per_page") perPage: Int
+    ): Single<ResponseUser>
 }
