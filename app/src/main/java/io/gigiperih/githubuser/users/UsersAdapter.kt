@@ -6,10 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.gigiperih.githubuser.databinding.RowUserBinding
 import io.gigiperih.githubuser.domain.entity.User
-import timber.log.Timber
+import io.gigiperih.githubuser.uitls.AutoUpdatableAdapter
+import kotlin.properties.Delegates
 
-class UsersAdapter(private val users: List<User>) :
-    RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+class UsersAdapter() :
+    RecyclerView.Adapter<UsersAdapter.UserViewHolder>(), AutoUpdatableAdapter {
+
+    var items: List<User> by Delegates.observable(emptyList()) { _, old, new ->
+        autoNotify(old, new) { o, n -> o.id == n.id }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -17,10 +22,10 @@ class UsersAdapter(private val users: List<User>) :
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bindUser(users[position])
+        holder.bindUser(items[position])
     }
 
-    override fun getItemCount() = users.size
+    override fun getItemCount() = items.size
 
     inner class UserViewHolder(
         var binding: RowUserBinding

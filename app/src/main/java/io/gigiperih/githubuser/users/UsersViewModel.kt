@@ -15,9 +15,10 @@ class UsersViewModel @Inject constructor(private val searchUsersUseCase: SearchU
     val users: MutableLiveData<ResponseUser> = MutableLiveData()
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun findUsers(query: String) {
+    fun findUsers(query: String, page: Int) {
         searchUsersUseCase.apply {
             this.query = query
+            this.page = page
             execute(
                 onStart = {
                     Timber.d("grigi > starting")

@@ -7,9 +7,13 @@ import javax.inject.Inject
 
 class SearchUsersUseCase @Inject constructor(
     private val repository: UsersRepository
-) :
-    SingleUseCase<ResponseUser>() {
+) : SingleUseCase<ResponseUser>() {
+    companion object {
+        const val PER_PAGE = 10
+    }
 
     var query: String = ""
-    override fun buildSingleUseCase() = repository.getUsers(param = query)
+    var page: Int = 1
+    override fun buildSingleUseCase() =
+        repository.getUsers(param = query, since = page, perPage = PER_PAGE)
 }

@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit
 @AndroidEntryPoint
 class UsersActivity : BaseActivity<ActivityUsersBinding>() {
     private val viewModel: UsersViewModel by viewModels()
+    private val usersAdapter = UsersAdapter()
 
     override fun layoutRes() = R.layout.activity_users
 
@@ -32,17 +33,17 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                if (it.isNotEmpty()) viewModel.findUsers(it)
+                if (it.isNotEmpty()) viewModel.findUsers(it, 1)
             }, {
                 it.printStackTrace()
             })
 
 
-        viewModel.users.observe(this, { users ->
-            with(dataBinding) {
-                val usersAdapter = UsersAdapter(users.items)
-                usersAdapter.notifyDataSetChanged()
 
+        viewModel.users.observe(this, { users ->
+
+            usersAdapter.items = users.items
+            with(dataBinding) {
                 recyclerViewUser.apply {
                     layoutManager =
                         LinearLayoutManager(
