@@ -10,8 +10,10 @@ Github user finder for Android
 
 ## feature
 - automated kaban github-project can be found here: https://github.com/gilangabdulaziz/github-user-finder/projects/1
-- apk can be downloaded here:
+- apk can be downloaded here: https://github.com/gilangabdulaziz/github-user-finder/blob/main/raw/app-debug.apk.zip
 - sneak peak:
+https://user-images.githubusercontent.com/15605206/114031424-90206500-98a5-11eb-8ab4-e1e8c345f049.mp4
+
 
 ## curl
 ```curl
