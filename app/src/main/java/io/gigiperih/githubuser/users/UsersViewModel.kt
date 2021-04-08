@@ -8,7 +8,7 @@ import io.gigiperih.githubuser.domain.usecase.SearchUsersUseCase
 import javax.inject.Inject
 
 @HiltViewModel
-class UsersViewModel @Inject constructor(private val searchUsersUseCase: SearchUsersUseCase) :
+class UsersViewModel @Inject constructor(private var searchUsersUseCase: SearchUsersUseCase) :
     ViewModel() {
     val usersState: MutableLiveData<UsersState<ResponseUser>> = MutableLiveData()
 

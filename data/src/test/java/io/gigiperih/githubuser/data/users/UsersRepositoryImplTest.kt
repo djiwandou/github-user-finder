@@ -12,12 +12,12 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class UsersRepositoryImplTest {
+    private val objectUnderTest = UsersRepositoryImpl(FakeGithubUserService())
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
     }
-
-    private val objectUnderTest = UsersRepositoryImpl(FakeGithubUserService())
 
     @Test
     fun `verify UsersRepositoryImpl is not null`() {
