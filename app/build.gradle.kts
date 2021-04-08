@@ -43,6 +43,12 @@ android {
     kapt {
         correctErrorTypes = true
     }
+
+    testOptions {
+        unitTests.apply {
+            isReturnDefaultValues = true
+        }
+    }
 }
 
 dependencies {
@@ -101,6 +107,8 @@ dependencies {
     testImplementation("androidx.test.ext:junit:1.1.2")
     testImplementation("androidx.test.ext:truth:1.3.0")
     testImplementation("org.mockito:mockito-core:3.1.0")
+    testImplementation("org.mockito:mockito-inline:3.1.0")
+    testImplementation("com.jraska.livedata:testing-ktx:1.1.2")
 
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")

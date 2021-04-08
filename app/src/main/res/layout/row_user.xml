@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,25 +24,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:textColor="@color/black_90"
             android:fontFamily="@font/lato_bold"
-            android:text="Gilang"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="@color/black_90"
             app:layout_constraintBottom_toTopOf="@id/text_url"
             app:layout_constraintStart_toEndOf="@id/image_thumb"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Gilang" />
 
         <TextView
             android:id="@+id/text_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="https://github.com.sheit"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             android:textColor="@color/purple_500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/image_thumb"
-            app:layout_constraintTop_toBottomOf="@id/text_username" />
+            app:layout_constraintTop_toBottomOf="@id/text_username"
+            tools:text="https://github.com" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

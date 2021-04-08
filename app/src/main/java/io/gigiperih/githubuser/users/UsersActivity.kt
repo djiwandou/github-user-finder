@@ -104,6 +104,8 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
             }
             is UsersState.OnLoadMore -> {
                 // TODO: add loading item view type in recyclerView
+                // in fact I don't have time ;)
+                dataBinding.loadMoreAnimation.visible()
             }
             is UsersState.OnSuccess -> {
                 val users = state.data
@@ -114,6 +116,7 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                     with(dataBinding) {
                         recyclerViewUser.visible()
                         loadingAnimation.gone()
+                        loadMoreAnimation.gone()
 
                         textResult.text = getString(
                             R.string.result_search,
