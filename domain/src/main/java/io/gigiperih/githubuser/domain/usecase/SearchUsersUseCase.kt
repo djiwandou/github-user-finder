@@ -14,6 +14,7 @@ class SearchUsersUseCase @Inject constructor(
 
     var query: String = ""
     var page: Int = 1
+
     override fun buildSingleUseCase() =
         repository.getUsers(param = query, since = page, perPage = PER_PAGE)
 }

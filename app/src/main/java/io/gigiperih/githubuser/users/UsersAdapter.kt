@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.gigiperih.githubuser.databinding.RowUserBinding
 import io.gigiperih.githubuser.domain.entity.User
-import io.gigiperih.githubuser.uitls.AutoUpdatableAdapter
-import kotlin.properties.Delegates
 
-class UsersAdapter() :
-    RecyclerView.Adapter<UsersAdapter.UserViewHolder>(), AutoUpdatableAdapter {
-
-    var items: List<User> by Delegates.observable(emptyList()) { _, old, new ->
-        autoNotify(old, new) { o, n -> o.id == n.id }
+class UsersAdapter :
+    RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+    private val items = mutableListOf<User>()
+    
+    fun addItems(list: List<User>) {
+        items.addAll(list)
+        notifyItemRangeInserted(items.size - 1, 10)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

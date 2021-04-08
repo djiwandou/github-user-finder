@@ -19,6 +19,8 @@ class UsersViewModel @Inject constructor(private val searchUsersUseCase: SearchU
         searchUsersUseCase.apply {
             this.query = query
             this.page = page
+
+            Timber.d("shoutaaa $query > $page")
             execute(
                 onStart = {
                     Timber.d("grigi > starting")
@@ -26,7 +28,7 @@ class UsersViewModel @Inject constructor(private val searchUsersUseCase: SearchU
                 },
                 onSuccess = {
                     Timber.d("grigi > success")
-                    users.postValue(it)
+                    users.value = it
                     isLoading.postValue(false)
                 },
                 onError = {

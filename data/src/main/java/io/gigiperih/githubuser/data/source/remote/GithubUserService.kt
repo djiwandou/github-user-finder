@@ -9,7 +9,7 @@ interface GithubUserService {
     @GET("search/users")
     fun getUsers(
         @Query("q") query: String,
-        @Query("since") since: Int,
+        @Query("page") since: Int,
         @Query("per_page") perPage: Int
     ): Single<ResponseUser>
 }
