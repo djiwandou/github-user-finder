@@ -8,6 +8,11 @@ Github user finder for Android
 - Android Architecture Component with modularized clean architecture approach
 - Unit tested in domain, data and presentation layers
 
+## feature
+- automated kaban github-project can be found here: https://github.com/gilangabdulaziz/github-user-finder/projects/1
+- apk can be downloaded here:
+- sneak peak:
+
 ## curl
 ```curl
 curl \
