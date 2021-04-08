@@ -98,7 +98,18 @@
             android:visibility="gone"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:lottie_autoPlay="true"
+            app:lottie_loop="true"
             app:lottie_rawRes="@raw/search_anim" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/load_more_animation"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="bottom"
+            android:visibility="gone"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/hourglass_anim" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
