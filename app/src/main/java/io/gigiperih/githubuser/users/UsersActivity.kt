@@ -15,6 +15,7 @@ import io.gigiperih.githubuser.domain.entity.ResponseUser
 import io.gigiperih.githubuser.uitls.RxPagingObservable
 import io.gigiperih.githubuser.uitls.RxSearchObservable
 import io.gigiperih.githubuser.uitls.ext.gone
+import io.gigiperih.githubuser.uitls.ext.hideSoftKeyboard
 import io.gigiperih.githubuser.uitls.ext.observe
 import io.gigiperih.githubuser.uitls.ext.visible
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -109,10 +110,10 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
                 users?.let { response ->
                     usersAdapter.addItems(response.items)
 
+                    hideSoftKeyboard()
                     with(dataBinding) {
                         recyclerViewUser.visible()
                         loadingAnimation.gone()
-
 
                         textResult.text = getString(
                             R.string.result_search,
