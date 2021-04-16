@@ -1,4 +1,4 @@
-package io.gigiperih.githubuser.uitls
+package io.gigiperih.githubuser.utils
 
 import android.text.Editable
 import android.text.TextWatcher

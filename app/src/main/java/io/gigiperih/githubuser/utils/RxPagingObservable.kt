@@ -1,4 +1,4 @@
-package io.gigiperih.githubuser.uitls
+package io.gigiperih.githubuser.utils
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +18,8 @@ object RxPagingObservable {
 
                     if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
                         subject.onNext(true)
+                    } else {
+                        subject.onNext(false)
                     }
                 }
             }

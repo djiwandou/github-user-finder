@@ -12,12 +12,12 @@ import io.gigiperih.githubuser.R
 import io.gigiperih.githubuser.arch.BaseActivity
 import io.gigiperih.githubuser.databinding.ActivityUsersBinding
 import io.gigiperih.githubuser.domain.entity.ResponseUser
-import io.gigiperih.githubuser.uitls.RxPagingObservable
-import io.gigiperih.githubuser.uitls.RxSearchObservable
-import io.gigiperih.githubuser.uitls.ext.gone
-import io.gigiperih.githubuser.uitls.ext.hideSoftKeyboard
-import io.gigiperih.githubuser.uitls.ext.observe
-import io.gigiperih.githubuser.uitls.ext.visible
+import io.gigiperih.githubuser.utils.RxPagingObservable
+import io.gigiperih.githubuser.utils.RxSearchObservable
+import io.gigiperih.githubuser.utils.ext.gone
+import io.gigiperih.githubuser.utils.ext.hideSoftKeyboard
+import io.gigiperih.githubuser.utils.ext.observe
+import io.gigiperih.githubuser.utils.ext.visible
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -33,6 +33,7 @@ class UsersActivity : BaseActivity<ActivityUsersBinding>() {
     override fun layoutRes() = R.layout.activity_users
 
     override fun initView(savedInstanceState: Bundle?) {
+
         observe(viewModel.usersState, ::bindState)
 
         ViewCompat.setNestedScrollingEnabled(dataBinding.recyclerViewUser, true)

@@ -1,4 +1,4 @@
-package io.gigiperih.githubuser.uitls.ext
+package io.gigiperih.githubuser.utils.ext
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData

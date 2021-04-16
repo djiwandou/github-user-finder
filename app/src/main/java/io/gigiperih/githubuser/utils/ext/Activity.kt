@@ -1,4 +1,4 @@
-package io.gigiperih.githubuser.uitls.ext
+package io.gigiperih.githubuser.utils.ext
 
 import android.app.Activity
 import android.view.inputmethod.InputMethodManager
